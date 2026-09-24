@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Muslim Apps</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top, #123f32 0%, #071c17 45%, #03100d 100%);
+    color:#fff;
+    min-height:100vh;
+    padding:25px 16px 40px;
+}
+
+.container{
+    max-width:520px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    padding:20px 10px 28px;
+}
+
+.logo{
+    width:86px;
+    height:86px;
+    border-radius:24px;
+    object-fit:cover;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45),
+        0 0 30px rgba(91,190,145,.15);
+    margin-bottom:16px;
+}
+
+.title{
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.subtitle{
+    color:#a9cfc1;
+    font-size:14px;
+    margin-top:8px;
+}
+
+/* SECTION */
+
+.section-title{
+    font-size:13px;
+    color:#86c9b1;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin:12px 4px 12px;
+}
+
+/* APP CARD */
+
+.app-card{
+    position:relative;
+    overflow:hidden;
+    background:rgba(12,45,36,.82);
+    border:1px solid rgba(126,213,177,.15);
+    border-radius:25px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.03);
+    backdrop-filter:blur(15px);
+}
+
+.app-card::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:rgba(76,185,137,.07);
+    right:-65px;
+    top:-65px;
+}
+
+.app-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    position:relative;
+    z-index:1;
+}
+
+.app-icon{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    object-fit:cover;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+
+.app-info{
+    flex:1;
+}
+
+.app-name{
+    font-size:22px;
+    font-weight:800;
+}
+
+.version{
+    display:inline-block;
+    margin-top:6px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:rgba(117,211,170,.1);
+    border:1px solid rgba(117,211,170,.15);
+    color:#9fe0c5;
+    font-size:11px;
+}
+
+/* BADGE */
+
+.badge{
+    position:absolute;
+    right:18px;
+    top:18px;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:1px;
+    padding:6px 9px;
+    border-radius:20px;
+    background:#d8a94b;
+    color:#151008;
+}
+
+.badge.beta{
+    background:#557ee8;
+    color:white;
+}
+
+/* DESCRIPTION */
+
+.description{
+    color:#a9c5bb;
+    font-size:13px;
+    line-height:1.65;
+    margin:18px 0;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.feature{
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:12px;
+    padding:10px;
+    color:#b9d5ca;
+    font-size:11px;
+}
+
+/* DOWNLOAD */
+
+.download-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    padding:15px;
+    border-radius:15px;
+    background:linear-gradient(135deg,#58c897,#299d70);
+    color:#062018;
+    font-size:14px;
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(49,178,124,.2);
+    transition:.2s;
+}
+
+.download-btn:active{
+    transform:scale(.97);
+}
+
+.beta-btn{
+    background:linear-gradient(135deg,#7c9cff,#536ed6);
+    color:white;
+    box-shadow:0 8px 20px rgba(83,110,214,.2);
+}
+
+/* NOTE */
+
+.note{
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
+    color:#8fb2a5;
+    font-size:11px;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* INSTALL */
+
+.install{
+    margin-top:25px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(7,31,25,.7);
+    border:1px solid rgba(126,213,177,.1);
+}
+
+.install h3{
+    font-size:16px;
+    margin-bottom:14px;
+}
+
+.step{
+    display:flex;
+    gap:10px;
+    margin:10px 0;
+    color:#9dbbb1;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.num{
+    min-width:23px;
+    height:23px;
+    border-radius:50%;
+    background:#286f53;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    color:#668c7e;
+    font-size:11px;
+    line-height:1.7;
+}
+
+.arabic{
+    font-size:18px;
+    color:#8cc9b3;
+    margin-bottom:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <img src="icon.png" class="logo" alt="Muslim">
+
+        <div class="title">Muslim</div>
+
+        <div class="subtitle">
+            Islamic apps for your daily life
+        </div>
+
+    </div>
+
+
+    <!-- MAIN APPS -->
+
+    <div class="section-title">
+        Choose your version
+    </div>
+
+
+    <!-- MUSLIM OFFICIAL -->
+
+    <div class="app-card">
+
+        <div class="badge">
+            OFFICIAL
+        </div>
+
+        <div class="app-top">
+
+            <img src="icon.png"
+                 class="app-icon"
+                 alt="Muslim">
+
+            <div class="app-info">
+
+                <div class="app-name">
+                    Muslim
+                </div>
+
+                <span class="version">
+                    Version 1.0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="description">
+
+            The official Muslim app with Quran,
+            prayer times, Islamic reminders,
+            duas and other useful Islamic features.
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature">
+                Quran & Ayah
+            </div>
+
+            <div class="feature">
+                Prayer Times
+            </div>
+
+            <div class="feature">
+                Islamic Duas
+            </div>
+
+            <div class="feature">
+                Prayer Reminder
+            </div>
+
+        </div>
+
+
+        <a href="Muslim.apk"
+           class="download-btn"
+           download>
+
+            DOWNLOAD MUSLIM
+
+        </a>
+
+    </div>
+
+
+
+    <!-- MUSLIM BETA -->
+
+    <div class="app-card">
+
+        <div class="badge beta">
+            BETA
+        </div>
+
+        <div class="app-top">
+
+            <img src="icon.png"
+                 class="app-icon"
+                 alt="Muslim Beta">
+
+            <div class="app-info">
+
+                <div class="app-name">
+                    Muslim Beta
+                </div>
+
+                <span class="version">
+                    Version 1.0 Beta
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="description">
+
+            Try upcoming features and experimental
+            improvements before they arrive in the
+            official Muslim app.
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature">
+                New Features
+            </div>
+
+            <div class="feature">
+                Early Updates
+            </div>
+
+            <div class="feature">
+                Experimental UI
+            </div>
+
+            <div class="feature">
+                Beta Testing
+            </div>
+
+        </div>
+
+
+        <a href="Muslim-Beta.apk"
+           class="download-btn beta-btn"
+           download>
+
+            DOWNLOAD MUSLIM BETA
+
+        </a>
+
+    </div>
+
+
+
+    <!-- INSTALL GUIDE -->
+
+    <div class="install">
+
+        <h3>
+            How to install
+        </h3>
+
+        <div class="step">
+            <div class="num">1</div>
+            <div>
+                Choose the version you want and tap
+                the download button.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="num">2</div>
+            <div>
+                Open the downloaded APK file.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="num">3</div>
+            <div>
+                If Android asks for permission,
+                allow installation from this source.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="num">4</div>
+            <div>
+                Install the app and open Muslim.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- NOTE -->
+
+    <div class="note">
+
+        Both versions can be downloaded separately.
+        The Official and Beta apps may be installed
+        together if they have different Android
+        application IDs.
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div class="arabic">
+          © NOMAN HOSSAIN
+        </div>
+
+        Muslim © 2026
+
+    </div>
+
+</div>
+
+</body>
+</html>
