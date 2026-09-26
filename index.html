@@ -271,10 +271,265 @@ body{
     color:#8cc9b3;
     margin-bottom:6px;
 }
+
+/* ANIMATED ISLAMIC BACKGROUND */
+body{
+    position:relative;
+    overflow-x:hidden;
+}
+.container{
+    position:relative;
+    z-index:2;
+}
+.islamic-bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(77,185,139,.08), transparent 22%),
+        radial-gradient(circle at 85% 75%, rgba(77,185,139,.06), transparent 25%);
+}
+.islamic-bg::before{
+    content:"";
+    position:absolute;
+    inset:-80px;
+    opacity:.22;
+    background-image:
+        linear-gradient(30deg, rgba(128,210,177,.07) 12%, transparent 12.5%, transparent 87%, rgba(128,210,177,.07) 87.5%, rgba(128,210,177,.07)),
+        linear-gradient(150deg, rgba(128,210,177,.07) 12%, transparent 12.5%, transparent 87%, rgba(128,210,177,.07) 87.5%, rgba(128,210,177,.07)),
+        linear-gradient(30deg, rgba(128,210,177,.07) 12%, transparent 12.5%, transparent 87%, rgba(128,210,177,.07) 87.5%, rgba(128,210,177,.07)),
+        linear-gradient(150deg, rgba(128,210,177,.07) 12%, transparent 12.5%, transparent 87%, rgba(128,210,177,.07) 87.5%, rgba(128,210,177,.07)),
+        linear-gradient(60deg, rgba(128,210,177,.045) 25%, transparent 25.5%, transparent 75%, rgba(128,210,177,.045) 75%);
+    background-size:80px 140px;
+    animation:patternMove 28s linear infinite;
+}
+.moon{
+    position:absolute;
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    right:8%;
+    top:8%;
+    background:rgba(224,239,219,.07);
+    box-shadow:0 0 55px rgba(170,220,190,.08);
+}
+.moon::after{
+    content:"";
+    position:absolute;
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    background:#061711;
+    left:-27px;
+    top:-16px;
+}
+.star-field{
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(circle, rgba(216,240,226,.7) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(216,240,226,.45) 1px, transparent 1.5px);
+    background-size:91px 113px, 137px 149px;
+    background-position:15px 25px, 60px 80px;
+    opacity:.22;
+    animation:stars 9s ease-in-out infinite alternate;
+}
+.pattern{
+    position:absolute;
+    color:rgba(115,204,166,.08);
+    font-family:serif;
+    user-select:none;
+    animation:floatIslamic 8s ease-in-out infinite;
+}
+.pattern-1{font-size:90px;left:4%;top:38%;}
+.pattern-2{font-size:42px;right:13%;top:38%;animation-delay:2s;}
+.pattern-3{font-size:72px;left:13%;bottom:9%;animation-delay:4s;}
+.pattern-4{font-size:55px;right:5%;bottom:23%;animation-delay:1s;}
+
+@keyframes patternMove{
+    from{transform:translate3d(0,0,0);}
+    to{transform:translate3d(80px,140px,0);}
+}
+@keyframes stars{
+    from{opacity:.13;transform:scale(1);}
+    to{opacity:.30;transform:scale(1.03);}
+}
+@keyframes floatIslamic{
+    0%,100%{transform:translateY(0) rotate(0deg);}
+    50%{transform:translateY(-15px) rotate(5deg);}
+}
+
+/* DOWNLOAD BUTTON ANIMATION */
+.download-btn{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+}
+.download-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-80%;
+    width:55%;
+    height:100%;
+    background:linear-gradient(105deg, transparent, rgba(255,255,255,.38), transparent);
+    transform:skewX(-20deg);
+}
+.download-btn:not(.is-loading)::before{
+    animation:buttonShine 3.2s ease-in-out infinite;
+}
+.download-btn::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    box-shadow:0 0 0 0 rgba(255,255,255,0);
+    pointer-events:none;
+}
+.download-btn.is-loading{
+    pointer-events:none;
+    transform:scale(.98);
+    filter:brightness(.92);
+}
+.download-btn.is-loading::before{
+    left:-70%;
+    animation:downloadSweep .9s linear infinite;
+}
+.download-btn .btn-content{
+    position:relative;
+    z-index:2;
+}
+.download-btn .download-icon{
+    display:inline-block;
+    margin-right:7px;
+    transition:transform .25s;
+}
+.download-btn:active .download-icon{
+    transform:translateY(3px);
+}
+.download-btn.is-loading .download-icon{
+    animation:downloadArrow 1s ease-in-out infinite;
+}
+@keyframes buttonShine{
+    0%,55%{left:-80%;}
+    75%,100%{left:135%;}
+}
+@keyframes downloadSweep{
+    from{left:-70%;}
+    to{left:135%;}
+}
+@keyframes downloadArrow{
+    0%,100%{transform:translateY(-2px);}
+    50%{transform:translateY(5px);}
+}
+
+/* CONFIRMATION MODAL */
+.confirm-overlay{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:22px;
+    background:rgba(1,10,7,.72);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .25s ease, visibility .25s ease;
+}
+.confirm-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+.confirm-box{
+    width:min(390px,100%);
+    padding:25px 22px 21px;
+    border-radius:25px;
+    text-align:center;
+    background:linear-gradient(145deg,rgba(15,54,43,.98),rgba(5,25,19,.98));
+    border:1px solid rgba(137,221,185,.20);
+    box-shadow:0 25px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.04);
+    transform:translateY(18px) scale(.96);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.confirm-overlay.show .confirm-box{
+    transform:translateY(0) scale(1);
+}
+.confirm-symbol{
+    width:62px;
+    height:62px;
+    margin:0 auto 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:19px;
+    font-size:30px;
+    background:rgba(100,198,155,.10);
+    border:1px solid rgba(122,214,177,.16);
+    animation:confirmPulse 2s ease-in-out infinite;
+}
+.confirm-title{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+.confirm-text{
+    color:#a9c7bb;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+.confirm-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+.confirm-btn{
+    border:0;
+    padding:13px 10px;
+    border-radius:13px;
+    font:inherit;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    transition:transform .18s, filter .18s;
+}
+.confirm-btn:active{
+    transform:scale(.96);
+}
+.confirm-no{
+    color:#b8ccc4;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.08);
+}
+.confirm-yes{
+    color:#062018;
+    background:linear-gradient(135deg,#63d3a2,#299d70);
+    box-shadow:0 8px 22px rgba(49,178,124,.20);
+}
+@keyframes confirmPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(104,210,165,.05);}
+    50%{box-shadow:0 0 0 10px rgba(104,210,165,0);}
+}
+
 </style>
 </head>
 
 <body>
+<div class="islamic-bg" aria-hidden="true">
+    <div class="moon"></div>
+    <div class="star-field"></div>
+    <div class="pattern pattern-1">☪</div>
+    <div class="pattern pattern-2">✦</div>
+    <div class="pattern pattern-3">۞</div>
+    <div class="pattern pattern-4">✧</div>
+</div>
 
 <div class="container">
 
@@ -361,9 +616,10 @@ body{
 
         <a href="Muslim.apk"
            class="download-btn"
-           download>
+           data-app="Muslim"
+           data-file="Muslim.apk">
 
-            DOWNLOAD MUSLIM
+            <span class="btn-content"><span class="download-icon">↓</span>DOWNLOAD MUSLIM</span>
 
         </a>
 
@@ -432,9 +688,10 @@ body{
 
         <a href="Muslim-Beta.apk"
            class="download-btn beta-btn"
-           download>
+           data-app="Muslim Beta"
+           data-file="Muslim-Beta.apk">
 
-            DOWNLOAD MUSLIM BETA
+            <span class="btn-content"><span class="download-icon">↓</span>DOWNLOAD MUSLIM BETA</span>
 
         </a>
 
@@ -500,7 +757,7 @@ body{
     <div class="footer">
 
         <div class="arabic">
-          © Md. Maruf Hosen Tonoy 
+          © NOMAN HOSSAIN
         </div>
 
         Muslim © 2026
@@ -509,5 +766,89 @@ body{
 
 </div>
 
+
+<!-- DOWNLOAD CONFIRMATION -->
+<div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="confirm-box">
+        <div class="confirm-symbol">↓</div>
+        <div class="confirm-title" id="confirmTitle">Download app?</div>
+        <div class="confirm-text" id="confirmText">
+            Do you want to download this APK to your device?
+        </div>
+        <div class="confirm-actions">
+            <button class="confirm-btn confirm-no" id="confirmNo" type="button">NO</button>
+            <button class="confirm-btn confirm-yes" id="confirmYes" type="button">YES, DOWNLOAD</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+    const overlay = document.getElementById('confirmOverlay');
+    const confirmText = document.getElementById('confirmText');
+    const yesBtn = document.getElementById('confirmYes');
+    const noBtn = document.getElementById('confirmNo');
+    const buttons = document.querySelectorAll('.download-btn');
+
+    let selectedButton = null;
+
+    function closeConfirm(){
+        overlay.classList.remove('show');
+        selectedButton = null;
+    }
+
+    buttons.forEach(function(button){
+        button.addEventListener('click', function(event){
+            event.preventDefault();
+
+            selectedButton = button;
+            const appName = button.getAttribute('data-app') || 'this app';
+
+            confirmText.textContent =
+                'Do you want to download ' + appName + ' APK to your device?';
+
+            overlay.classList.add('show');
+        });
+    });
+
+    noBtn.addEventListener('click', closeConfirm);
+
+    overlay.addEventListener('click', function(event){
+        if(event.target === overlay) closeConfirm();
+    });
+
+    document.addEventListener('keydown', function(event){
+        if(event.key === 'Escape' && overlay.classList.contains('show')){
+            closeConfirm();
+        }
+    });
+
+    yesBtn.addEventListener('click', function(){
+        if(!selectedButton) return;
+
+        const button = selectedButton;
+        const file = button.getAttribute('data-file');
+        const appName = button.getAttribute('data-app') || 'App';
+
+        button.classList.add('is-loading');
+
+        // Give the animation a moment before starting the browser download.
+        setTimeout(function(){
+            const link = document.createElement('a');
+            link.href = file;
+            link.download = file;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            closeConfirm();
+
+            setTimeout(function(){
+                button.classList.remove('is-loading');
+            }, 900);
+        }, 650);
+    });
+})();
+</script>
 </body>
 </html>
